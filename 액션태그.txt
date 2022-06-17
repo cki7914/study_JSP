@@ -1,0 +1,5 @@
+액션태그
+<jsp:include> : 특정 페이지를 현재 페이지에 포함시킬 때 사용
+<jsp:forward> : 요청을 전달하는 포워드에 사용
+<jsp:useBean>, <jsp:setProperty>, <jsp:getProperty> : 자바빈즈를 생성, 값 설정, 값 가져올 때 사용
+<jsp:param> : 인클루드나 포워드시 매개변수를 넘길 때 사용
