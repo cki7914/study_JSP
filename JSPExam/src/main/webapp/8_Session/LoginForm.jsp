@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<jsp:include page="../10_Board/Link.jsp"></jsp:include>
+
 	<h2>로그인 페이지</h2>
 	<span style="color:red; font-size:15px;">
 		<%= request.getAttribute("LoginErrMsg") == null ? "" : request.getAttribute("LoginErrMsg") %>

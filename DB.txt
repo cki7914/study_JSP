@@ -1,0 +1,77 @@
+1. 계정 생성
+CREATE USER green IDENTIFIED BY 1234;
+
+ROLE : 역할을 관련된 권한끼리 묶어둔 개념
+ - DBA(DB관리자) : 시스템 관리에 필요한 모든 권한을 부여
+ - CONNECT(접속) : DB접속에 필요한 가장 기본적인 시스템 권한
+ - RESOURCE(객체 생성) : 객체(테이블, 뷰, 인덱스 등)생성에 필요한 시스템 권한
+
+2. 권한 부여
+GRANT CONNECT, RESOURCE TO green;
+
+// SELECT * FROM TAB; : 현재 접속한 계정에 생성된 테이블의 목록 확인
+
+3. 테이블 생성
+ MEMBER 테이블 생성
+CREATE TABLE MEMBER (
+	ID VARCHAR2(10) NOT NULL,
+	PASS VARCHAR2(10) NOT NULL,
+	NAME VARCHAR2(30) NOT NULL,
+	REGIDATE DATE DEFAULT SYSDATE NOT NULL,
+	PRIMARY KEY(ID)
+);
+
+ BOARD 테이블 생성
+CREATE TABLE BOARD (
+	NUM NUMBER PRIMARY KEY,
+	TITLE VARCHAR2(200) NOT NULL,
+	CONTENT VARCHAR2(2000) NOT NULL,
+	ID VARCHAR2(10) NOT NULL,
+	POSTDATE DATE DEFAULT SYSDATE NOT NULL,
+	VISITCOUNT NUMBER(6)
+);
+
+4. 외래키로 관계 설정
+ALTER TABLE BOARD
+ADD CONSTRAINT BOARD_MEMBER_FK FOREIGN KEY(ID)
+REFERENCES MEMBER(ID);
+
+5. 시퀀스 생성 : 순차적으로 증가하는 순번을 반환
+CREATE SEQUENCE SEQ_BOARD_NUM
+	INCREMENT BY 1 -- 1씩 증가
+	START WITH 1 -- 시작값 1
+	MINVALUE 1 -- 최소값 1
+	NOMAXVALUE -- 최대값 없음(무한대)
+	NOCYCLE -- 순환하지 않음
+	NOCACHE; -- 캐시 사용하지 않음
+
+6. 더미 데이터 입력
+INSERT INTO MEMBER(ID, PASS, NAME)
+VALUES('green', '1234', '김그린');
+
+INSERT INTO BOARD(NUM, TITLE, CONTENT, ID, POSTDATE, VISITCOUNT)
+VALUES(
+	SEQ_BOARD_NUM.NEXTVAL, '제목1', '내용1입니다', 'green', SYSDATE, 0
+);
+
+ JDBC 연결 방법
+1. 서버가 설치된 하위경로의 lib폴더에 추가 -> 배포시 추가 안됨
+2. 개별 프로젝트의 WEB-INF 폴더의 lib에 추가 -> 프로젝트마다 매번 연결해야 함
+
+server.xml 추가
+ - 커넥션풀을 전역 자원으로 선언
+<Resource auth="Container"
+	  driverClassName="oracle.jdbc.OracleDriver" // JDBC 드라이버의 클래스명
+	  type="javax.sql.DataSource" // 데이터소스로 사용할 클래스명
+	  initialSize="0" // 풀의 최초 초기화 과정에서 미리 만들어 둘 연결 개수
+	  minIdle="5" // 최소로 유지할 연결의 개수
+	  maxTotal="20" // 동시에 사용할 수 있는 최대 연결 개수(기본값 8)
+	  maxIdle="20" // 풀에 반납할 때 최대로 유지될 수 있는 연결 개수(기본값 8)
+	  maxWaitMillis="5000" // 새로운 요청이 들어왔을 때 얼마나 대기할지 밀리초 단위
+	  url="jdbc:oracle:thin:@localhost:1521:xe" // 오라클 연결을 위한 URL
+	  name="dbcp_myoracle" // 생성할 풀의 이름
+	  username="green" // 계정 아이디
+	  password="1234" /> // 계정 비밀번호
+
+context.xml 추가
+<ResourceLink global="dbcp_myoracle" name="dbcp_myoracle" type="javax.sql.DataSource"/>
