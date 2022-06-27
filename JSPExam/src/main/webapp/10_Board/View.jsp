@@ -18,8 +18,21 @@
 <body>
 	<jsp:include page="./Link.jsp"></jsp:include>
 	
+	<script>
+		function deletePost() {
+			let confirmed = confirm("정말로 삭제하시겠어요?");
+			if(confirmed) {
+				let form = document.viewForm;
+				form.method = "post";
+				form.action = "DeleteProcess.jsp";
+				form.submit();
+			}
+		}
+	</script>
+	
 	<h2>회원제 게시판 - 상세보기</h2>
 	<form name="viewForm">
+		<input type="hidden" name="num" value="<%= dto.getNum() %>">
 		<table border="1" width="90%">
 			<tr>
 				<td>번호</td>
@@ -39,12 +52,12 @@
 			</tr>
 			<tr>
 				<td>내용</td>
-				<td colspan="3"><%= dto.getContent() %></td>
+				<td colspan="3"><%= dto.getContent().replace("\r\n", "<br>") %></td>
 			</tr>
 			<tr>
 				<td colspan="4" align="center">
-					<button type="button" onclick="">수정하기</button>
-					<button type="button" onclick="">삭제하기</button>
+					<button type="button" onclick="location.href='./Edit.jsp?num=<%= dto.getNum() %>'">수정하기</button>
+					<button type="button" onclick="deletePost()">삭제하기</button>
 					<button type="button" onclick="location.href='./List.jsp'">목록보기</button>
 				</td>
 			</tr>

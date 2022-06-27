@@ -127,5 +127,43 @@ public class BoardDAO extends JDBConnect {
 			System.out.println("조회수 증가 중 예외 발생");
 			e.printStackTrace();
 		}
-	}
+	} // updateVisitCount()
+	
+	// 선택한 게시글 수정하기
+	public int updateEdit(BoardDTO dto) {
+		int result = 0;
+		
+		try {
+			String query = "UPDATE BOARD "
+						 + "SET TITLE = ?, CONTENT = ? "
+						 + "WHERE NUM = ?";
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, dto.getTitle());
+			psmt.setString(2, dto.getContent());
+			psmt.setString(3, dto.getNum());
+			result = psmt.executeUpdate();
+		} catch(Exception e) {
+			System.out.println("게시글 수정 중 예외 발생");
+			e.printStackTrace();
+		}
+		
+		return result;
+	} // updateEdit();
+	
+	// 지정한 게시글 삭제
+	public int deletePost(BoardDTO dto) {
+		int result = 0;
+		
+		try {
+			String query = "DELETE FROM BOARD WHERE NUM = ?";
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, dto.getNum());
+			result = psmt.executeUpdate();
+		} catch(Exception e) {
+			System.out.println("게시글 삭제 중 예외 발생");
+			e.printStackTrace();
+		}
+		
+		return result;
+	} // deletePost()
 }
