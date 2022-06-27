@@ -8,8 +8,6 @@ import java.sql.Statement;
 
 import javax.servlet.ServletContext;
 
-
-
 public class JDBConnect {
 	public Connection con; // DB와 연결을 담당
 	public Statement stmt; // 인파라미터가 없는 정적 쿼리문을 담당

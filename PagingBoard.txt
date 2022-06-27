@@ -1,0 +1,44 @@
+한 페이지에 출력할 게시글 수
+POSTS_PER_PAGE = 10
+
+한 화면에 출력할 페이지 번호 수
+PAGES_PER_BLOCK = 5
+
+
+// 각 페이지에 출력할 게시글의 범위
+ 현재 1페이지일 때 (시작값 : 1, 종료값 : 10)
+ 현재 2페이지일 때 (시작값 : 11, 종료값 : 20)
+ 현재 n페이지일 때
+	시작값 : (n - 1) * POSTS_PER_PAGE + 1
+	종료값 : n * POSTS_PER_PAGE
+
+// 현재 페이지 수
+ 총 게시글 105개 (페이지 수 : 11)
+ 총 게시글 n개 (페이지 수 : i)
+	i = MATH.ceil(n / POSTS_PER_PAGE)
+
+// 이전 페이지 블록 바로가기
+ 현재 1페이지 (위치 : 1)
+ 현재 5페이지 (위치 : 1)
+ 현재 6페이지 (위치 : 6)
+ 현재 10페이지 (위치 : 6)
+	((현재 페이지 - 1) / PAGES_PER_BLOCK) * PAGES_PER_BLOCK + 1
+
+
+// 각 페이지의 번호를 출력
+	이전 페이지 블록의 결과값에서 BLOCK_PAGE만큼 반복하면서 +1 연산후 출력
+
+// 다음 페이지 블록 바로가기
+	각 페이지 번호를 출력한 후 +1하여 다음 페이지 블록 바로가기 설정
+
+ROWNUM : SELECT 쿼리문으로 추출하는 데이터에 순차적으로 부여되는 순번
+	   오라클에서 생성된 모든 테이블에서 사용할 수 있는 가상의 컬럼
+
+// 첫번째 페이지 출력할 게시물 가져오기
+SELECT * FROM (
+	SELECT TB.*, ROWNUM RNUM
+	FROM (
+		SELECT * FROM BOARD ORDER BY NUM DESC
+	) TB
+)
+WHERE RNUM BETWEEN 1 AND 10;

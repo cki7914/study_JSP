@@ -65,6 +65,44 @@ public class BoardDAO extends JDBConnect {
 		return bbs;
 	} // selectList()
 	
+	// 목록 출력시 페이징 기능 추가
+	public List<BoardDTO> selectListPage(Map<String, Object> map) {
+		List<BoardDTO> bbs = new Vector<BoardDTO>();
+		
+		try {
+			String query = "SELECT * FROM ("
+						 + "SELECT TB.*, ROWNUM RNUM FROM ("
+						 + "SELECT * FROM BOARD ";
+			if(map.get("searchWord") != null)
+				query += "WHERE " + map.get("searchField") + " LIKE '%" + map.get("searchWord") + "%' ";
+			query += "ORDER BY NUM DESC"
+				   + ") TB"
+				   + ") "
+				   + "WHERE RNUM BETWEEN ? AND ?";
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, map.get("start").toString());
+			psmt.setString(2, map.get("end").toString());
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				BoardDTO dto = new BoardDTO();
+				dto.setNum(rs.getString("num"));
+				dto.setTitle(rs.getString("title"));
+				dto.setContent(rs.getString("content"));
+				dto.setPostdate(rs.getDate("postdate"));
+				dto.setId(rs.getString("id"));
+				dto.setVisitCount(rs.getString("visitCount"));
+				
+				bbs.add(dto);
+			}
+		} catch(Exception e) {
+			System.out.println("게시물 조회 중 예외 발생");
+			e.printStackTrace();
+		}
+		
+		return bbs;
+	} // selectListPage()
+	
 	// 게시글 데이터를 받아 DB에 추가
 	public int insertWrite(BoardDTO dto) {
 		int result = 0;
