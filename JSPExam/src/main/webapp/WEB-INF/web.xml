@@ -25,41 +25,84 @@
 	  <url-pattern>/*</url-pattern>
 	</filter-mapping>
 	
-<session-config>
-	<session-timeout> 20 </session-timeout>
-</session-config>
-
-<!-- 드라이버 이름 -->
-<context-param>
-	<param-name>OracleDriver</param-name>
-	<param-value>oracle.jdbc.OracleDriver</param-value>
-</context-param>
-
-<!-- 접속URL -->
-<context-param>
-	<param-name>OracleURL</param-name>
-	<param-value>jdbc:oracle:thin:@localhost:1521:xe</param-value>
-</context-param>
-
-<!-- 계정ID -->
-<context-param>
-	<param-name>OracleId</param-name>
-	<param-value>green</param-value>
-</context-param>
-
-<!-- 계정PW -->
-<context-param>
-	<param-name>OraclePw</param-name>
-	<param-value>1234</param-value>
-</context-param>
-
-<context-param>
-	<param-name>POSTS_PER_PAGE</param-name>
-	<param-value>10</param-value>
-</context-param>
-
-<context-param>
-	<param-name>PAGES_PER_BLOCK</param-name>
-	<param-value>5</param-value>
-</context-param>
+	<session-config>
+		<session-timeout> 20 </session-timeout>
+	</session-config>
+	
+	<!-- 드라이버 이름 -->
+	<context-param>
+		<param-name>OracleDriver</param-name>
+		<param-value>oracle.jdbc.OracleDriver</param-value>
+	</context-param>
+	
+	<!-- 접속URL -->
+	<context-param>
+		<param-name>OracleURL</param-name>
+		<param-value>jdbc:oracle:thin:@localhost:1521:xe</param-value>
+	</context-param>
+	
+	<!-- 계정ID -->
+	<context-param>
+		<param-name>OracleId</param-name>
+		<param-value>green</param-value>
+	</context-param>
+	
+	<!-- 계정PW -->
+	<context-param>
+		<param-name>OraclePw</param-name>
+		<param-value>1234</param-value>
+	</context-param>
+	
+	<context-param>
+		<param-name>POSTS_PER_PAGE</param-name>
+		<param-value>10</param-value>
+	</context-param>
+	
+	<context-param>
+		<param-name>PAGES_PER_BLOCK</param-name>
+		<param-value>5</param-value>
+	</context-param>
+	
+	<!-- 서블릿 등록 -->
+	<servlet>
+		<servlet-name>loginservlet_ex</servlet-name>
+		<servlet-class>servlet.loginservlet_ex</servlet-class>
+	</servlet>
+	<!-- 경로 매핑 -->
+	<servlet-mapping>
+		<servlet-name>loginservlet_ex</servlet-name>
+		<url-pattern>/15_Servlet/login_ex</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>HelloServlet</servlet-name>
+		<servlet-class>servlet.HelloServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>HelloServlet</servlet-name>
+		<url-pattern>/15_Servlet/HelloServlet.naver</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>DirectServletPrint</servlet-name>
+		<servlet-class>servlet.DirectServletPrint</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DirectServletPrint</servlet-name>
+		<url-pattern>/15_Servlet/DirectServletPrint.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>MemberAuth</servlet-name>
+		<servlet-class>servlet.MemberAuth</servlet-class>
+		<init-param>
+			<param-name>admin_id</param-name>
+			<param-value>admin_green</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MemberAuth</servlet-name>
+		<url-pattern>/15_Servlet/MemberAuth.mvc</url-pattern>
+	</servlet-mapping>
+	
 </web-app>

@@ -1,0 +1,32 @@
+1. 화면(폼) 작성
+2. 데이터베이스 테이블 준비
+3. DAO, DTO 작성
+4. 전부 연동하면 완성
+
+컬럼명		데이터타입	NULL허용		키	기본값		설명
+IDX		NUMBER		NOT NULL	PK			일련번호
+NAME		VARCHAR2(50)	NOT NULL				작성자
+TITLE		VARCHAR2(200)	NOT NULL				제목
+CATE		VARCHAR2(30)						카테고리
+OFILE		VARCHAR2(100)	NOT NULL				원본파일이름
+SFILE		VARCHAR2(30)	NOT NULL				저장된  파일명
+POSTDATE	DATE		NOT NULL		SYSDATE		등록한 날짜
+
+CREATE TABLE MYFILE(
+IDX NUMBER NOT NULL PRIMARY KEY,
+NAME VARCHAR2(50) NOT NULL,
+TITLE VARCHAR2(500) NOT NULL,
+CATE VARCHAR2(30),
+OFILE VARCHAR2(100) NOT NULL,
+SFILE VARCHAR2(30) NOT NULL,
+POSTDATE DATE DEFAULT SYSDATE NOT NULL
+);
+
+파일 업로드
+1. MultipartRequest 객체 생성
+2. 새로운 파일명 생성
+3. 파일명 변경
+4. 다른 폼값 처리
+5. DTO생성
+6. DAO통해서 데이터베이스 반영
+7. 파일목록 JSP로 보내기
