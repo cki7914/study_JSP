@@ -1,0 +1,44 @@
+HTML / CSS / JS - 정적 사이트 제작
+JSP - 동적 사이트 제작
+
+기존방식 - 클라이언트의 요청을 JSP로 받음
+서블릿 - 클라이언트의 요청을 Servlet으로 받음
+
+MVC패턴 - Model(JAVA), View(JSP), Controller(Servlet)
+
+Servlet - 웹 클라이언트의 요청을 처리할 수 있는 클래스
+          - 서블릿은 요청명을 기준으로 처리할 서블릿을 선택하게 됨
+          - 요청명과 서블릿을 연결해주는 작업 : 매핑
+
+서블릿의 기본 메서드
+1) @PostConstruct
+	: 객체 생성 직후, init() 메서드를 호출하기 전에 호출
+
+2) init() - 생략 가능
+	: tomcat 서버의 메모리에 로드시키는 역할(초기화)
+	: 최초 단 한번만 호출
+
+3) destroy() - 생략 가능
+	: 소멸자
+	: 서블릿이 새롭게 컴파일되거나 서버가 종료될 때 호출
+
+4) doGet()
+	: 웹브라우저 주소창을 이용해 get 방식으로 요청하면 호출되는 메서드
+
+5) doPost()
+	: 폼 태그 속성을 post로 설정하면 호출되는 메서드
+
+6) @PreDestroy
+	: destroy() 메서드가 실행되고 난 후 서블릿을 제거하는 과정에서 호출
+
+매핑
+1. web.xml에 작성
+<servlet>
+	<servlet-name>서블릿명</servlet-name>
+	<servlet-class>패키지명.서블릿클래스명</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>서블릿명</servlet-name>
+	<url-pattern>클라이언트 요청 url</url-pattern>
+</servlet-mapping>
+2. @WebServlet 애너테이션 사용

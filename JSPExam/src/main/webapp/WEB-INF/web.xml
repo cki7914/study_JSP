@@ -105,4 +105,27 @@
 		<url-pattern>/15_Servlet/MemberAuth.mvc</url-pattern>
 	</servlet-mapping>
 	
+	<servlet>
+		<servlet-name>MVCBoardList</servlet-name>
+		<servlet-class>model2.ListController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MVCBoardList</servlet-name>
+		<url-pattern>/model2/list.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>MVCBoardWrite</servlet-name>
+		<servlet-class>model2.WriteController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MVCBoardWrite</servlet-name>
+		<url-pattern>/model2/write.do</url-pattern>
+	</servlet-mapping>
+	
+	<context-param>
+		<param-name>maxPostSize</param-name>
+		<param-value>1048576</param-value>
+	</context-param>
+	
 </web-app>
