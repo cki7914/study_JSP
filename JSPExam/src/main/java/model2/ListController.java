@@ -36,7 +36,7 @@ public class ListController extends HttpServlet {
 		// 현재 페이지 확인
 		int pageNum = 1; // 페이지의 기본값
 		String pageTemp = req.getParameter("pageNum");
-		if(pageTemp != null && pageTemp.equals(""))
+		if(pageTemp != null && !pageTemp.equals(""))
 			pageNum = Integer.parseInt(pageTemp); // 요청받은 페이지로 변경
 		
 		// 목록에 출력할 게시물 범위 계산
