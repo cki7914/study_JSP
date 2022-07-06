@@ -7,23 +7,20 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h2>파일 첨부형 게시판 - 글쓰기(Write)</h2>
-	<form action="../model2/write.do" name="writeFrm" method="post" enctype="multipart/form-data" onsubmit="return validateForm(this)">
-		<input type="hidden" name="idx" value="${ dto.idx }" />
-		<input type="hidden" name="prevOfile" value="${ dto.ofile }" />
-		<input type="hidden" name="prevSfile" value="${ dto.sfile }" />
+	<h2>파일 첨부형 게시판 - 수정하기</h2>
+	<form action="../model2/edit.do" name="writeFrm" method="post" enctype="multipart/form-data" onsubmit="return validateForm(this)">
 		<table border="1" width="90%">
 			<tr>
 				<td>작성자</td>
-				<td><input type="text" name="name" style="width:150px;" /></td>
+				<td><input type="text" name="name" style="width:150px;" value="${ dto.name }" /></td>
 			</tr>
 			<tr>
 				<td>제목</td>
-				<td><input type="text" name="title" style="width:90%;" /></td>
+				<td><input type="text" name="title" style="width:90%;" value="${ dto.title }" /></td>
 			</tr>
 			<tr>
 				<td>내용</td>
-				<td><textarea name="content" style="width:90%; height:100px;"></textarea></td>
+				<td><textarea name="content" style="width:90%; height:100px;">${ dto.content }</textarea></td>
 			</tr>
 			<tr>
 				<td>첨부 파일</td>
@@ -31,7 +28,7 @@
 			</tr>
 			<tr>
 				<td>비밀번호</td>
-				<td><input type="password" name="pass" style="width:150px;" /></td>
+				<td><input type="password" name="pass" style="width:150px;" value="${ dto.pass }" /></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center">
