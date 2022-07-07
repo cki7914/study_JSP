@@ -128,4 +128,9 @@
 		<param-value>1048576</param-value>
 	</context-param>
 	
+	<context-param>
+		<param-name>CHAT_ADDR</param-name>
+		<param-value>ws://192.168.50.133:8090/JSPExam</param-value>
+	</context-param>
+	
 </web-app>
