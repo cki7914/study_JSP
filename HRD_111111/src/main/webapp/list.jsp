@@ -56,7 +56,7 @@
 	        				}
 	        	%>
 	        		<tr>
-	        			<td><a href=""><%= rs.getString("custno") %></a></td>
+	        			<td><a href="modify.jsp?mod_custno=<%= rs.getString("custno") %>"><%= rs.getString("custno") %></a></td>
 	        			<td><%= rs.getString("custname") %></td>
 	        			<td><%= rs.getString("phone") %></td>
 	        			<td><%= rs.getString("address") %></td>

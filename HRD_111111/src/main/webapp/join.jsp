@@ -35,7 +35,7 @@
 	
 	<section>
 		<h2>홈쇼핑 회원 등록</h2>
-		<form action="" name="frm">
+		<form action="joinProcess.jsp" name="frm" method="post">
 			<table border="1">
 				<tr>
 					<td>회원번호</td>
@@ -47,7 +47,7 @@
 				</tr>
 				<tr>
 					<td>회원전화</td>
-					<td><input type="text" name="custphone" /></td>
+					<td><input type="text" name="phone" /></td>
 				</tr>
 				<tr>
 					<td>회원주소</td>

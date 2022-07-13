@@ -36,3 +36,11 @@ function joinCheck(){
 function success(){
     alert("회원 등록이 완료되었습니다.");
 }
+
+function modify(){
+	alert("회원정보수정이 완료되었습니다.");
+}
+
+function search(){
+	window.location = "list.jsp";
+}
